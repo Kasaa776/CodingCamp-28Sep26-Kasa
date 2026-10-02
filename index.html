@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense &amp; Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <h1>Expense &amp; Budget Visualizer</h1>
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Ganti mode gelap/terang"></button>
+    </header>
+
+    <!-- Total Balance -->
+    <section class="card balance">
+      <p class="label">TOTAL BALANCE</p>
+      <p id="total-balance" class="balance-value">$0.00</p>
+    </section>
+
+    <!-- Add Transaction -->
+    <section class="card">
+      <h2>Add Transaction</h2>
+      <form id="tx-form" novalidate>
+        <label for="item-name">Item Name</label>
+        <input id="item-name" type="text" placeholder="e.g. Cilok" maxlength="60">
+
+        <label for="amount">Amount</label>
+        <input id="amount" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal">
+
+        <label for="category">Category</label>
+        <select id="category"></select>
+
+        <label for="tx-date">Date</label>
+        <input id="tx-date" type="date">
+
+        <p id="form-error" class="error" role="alert" hidden></p>
+        <button type="submit" class="btn primary">Add Transaction</button>
+      </form>
+    </section>
+
+    <!-- Custom Category -->
+    <section class="card">
+      <h2>Custom Categories</h2>
+      <form id="cat-form" class="inline-form" novalidate>
+        <input id="new-category" type="text" placeholder="e.g. Health" maxlength="20" aria-label="Nama kategori baru">
+        <button type="submit" class="btn primary">Add</button>
+      </form>
+      <p id="cat-error" class="error" role="alert" hidden></p>
+      <ul id="cat-chips" class="chips"></ul>
+    </section>
+
+    <!-- Monthly Summary -->
+    <section class="card">
+      <div class="card-head">
+        <h2>Monthly Summary</h2>
+        <input id="month-picker" type="month" aria-label="Pilih bulan">
+      </div>
+      <div class="stats">
+        <div><span class="label">Total spent</span><strong id="m-total">$0.00</strong></div>
+        <div><span class="label">Transactions</span><strong id="m-count">0</strong></div>
+        <div><span class="label">Top category</span><strong id="m-top">-</strong></div>
+      </div>
+      <ul id="m-breakdown" class="breakdown"></ul>
+      <p id="m-empty" class="empty" hidden>Belum ada transaksi di bulan ini.</p>
+    </section>
+
+    <!-- List + Chart -->
+    <div class="grid">
+      <section class="card">
+        <h2>Transactions</h2>
+        <ul id="tx-list" class="tx-list"></ul>
+        <p id="list-empty" class="empty">Belum ada transaksi. Tambahkan yang pertama di atas.</p>
+      </section>
+
+      <section class="card">
+        <h2>Spending by Category</h2>
+        <div class="chart-wrap"><canvas id="chart" aria-label="Grafik pai pengeluaran per kategori" role="img"></canvas></div>
+        <p id="chart-empty" class="empty">Grafik muncul setelah ada transaksi.</p>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
